@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识宝藏 - 笔记分享与网站收藏</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #6b8cbc;
+            --accent: #ff7e5f;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: var(--radius);
+            transition: background 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* 主要内容区 */
+        main {
+            padding: 2rem 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        .section-title {
+            margin-bottom: 1.5rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background: #ff6b4a;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* 网格布局 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* 表单样式 */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(74, 111, 165, 0.25);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* 分类标签 */
+        .category-tag {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .category-study {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .category-work {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .category-life {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .category-tech {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        .category-design {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        /* 模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 600px;
+            padding: 2rem;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+                display: none;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #6c757d;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-gem"></i>
+                    <span>知识宝藏</span>
+                </div>
+                <nav>
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-section="home">首页</a></li>
+                        <li><a href="#" class="nav-link" data-section="notes">我的笔记</a></li>
+                        <li><a href="#" class="nav-link" data-section="websites">宝藏网站</a></li>
+                        <li><a href="#" class="nav-link" data-section="about">关于</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main>
+        <div class="container">
+            <!-- 首页 -->
+            <section id="home" class="section active">
+                <div class="card">
+                    <h1 class="section-title">
+                        <i class="fas fa-home"></i>欢迎来到知识宝藏
+                    </h1>
+                    <p>这是一个分享学习笔记和收藏优质网站的平台。在这里，您可以记录学习心得，收藏有价值的网站资源，并与他人分享。</p>
+                    
+                    <div class="grid" style="margin-top: 2rem;">
+                        <div class="card">
+                            <h3><i class="fas fa-sticky-note"></i> 笔记分享</h3>
+                            <p>记录学习、工作和生活中的点滴思考，整理知识体系，分享给他人。</p>
+                            <button class="btn btn-primary" style="margin-top: 1rem;" data-section="notes">查看笔记</button>
+                        </div>
+                        <div class="card">
+                            <h3><i class="fas fa-bookmark"></i> 网站收藏</h3>
+                            <p>收藏优质的学习资源、工具网站和设计灵感，构建个人知识库。</p>
+                            <button class="btn btn-primary" style="margin-top: 1rem;" data-section="websites">查看网站</button>
+                        </div>
+                        <div class="card">
+                            <h3><i class="fas fa-users"></i> 社区分享</h3>
+                            <p>发现他人的优质笔记和网站收藏，互相学习，共同进步。</p>
+                            <button class="btn btn-accent" style="margin-top: 1rem;">探索社区</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="section-title">
+                        <i class="fas fa-fire"></i>热门内容
+                    </h2>
+                    <div class="grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">JavaScript高级程序设计笔记</h3>
+                                <span class="category-tag category-study">学习笔记</span>
+                            </div>
+                            <p>深入理解JavaScript核心概念，包括闭包、原型链、异步编程等。</p>
+                            <div class="card-actions" style="margin-top: 1rem;">
+                                <button class="btn btn-outline">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">CSS Tricks</h3>
+                                <span class="category-tag category-design">设计网站</span>
+                            </div>
+                            <p>前端开发者和设计师必备的CSS技巧和教程网站。</p>
+                            <div class="card-actions" style="margin-top: 1rem;">
+                                <button class="btn btn-outline">访问网站</button>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">产品设计工作流</h3>
+                                <span class="category-tag category-work">工作笔记</span>
+                            </div>
+                            <p>从需求分析到产品上线的完整设计流程和方法论。</p>
+                            <div class="card-actions" style="margin-top: 1rem;">
+                                <button class="btn btn-outline">查看详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 笔记页面 -->
+            <section id="notes" class="section">
+                <div class="card">
+                    <h1 class="section-title">
+                        <i class="fas fa-sticky-note"></i>我的笔记
+                        <button class="btn btn-primary" id="add-note-btn">
+                            <i class="fas fa-plus"></i> 添加笔记
+                        </button>
+                    </h1>
+                    <div id="notes-list">
+                        <!-- 笔记列表将在这里动态生成 -->
+                        <div class="empty-state">
+                            <i class="fas fa-sticky-note"></i>
+                            <h3>暂无笔记</h3>
+                            <p>点击上方按钮添加您的第一条笔记</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 网站收藏页面 -->
+            <section id="websites" class="section">
+                <div class="card">
+                    <h1 class="section-title">
+                        <i class="fas fa-bookmark"></i>宝藏网站
+                        <button class="btn btn-primary" id="add-website-btn">
+                            <i class="fas fa-plus"></i> 添加网站
+                        </button>
+                    </h1>
+                    <div id="websites-list">
+                        <!-- 网站列表将在这里动态生成 -->
+                        <div class="empty-state">
+                            <i class="fas fa-bookmark"></i>
+                            <h3>暂无收藏网站</h3>
+                            <p>点击上方按钮添加您的第一个网站收藏</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 关于页面 -->
+            <section id="about" class="section">
+                <div class="card">
+                    <h1 class="section-title">
+                        <i class="fas fa-info-circle"></i>关于知识宝藏
+                    </h1>
+                    <p>知识宝藏是一个专注于知识管理和资源共享的平台。我们相信知识的价值在于分享和应用，因此创建了这个平台，让每个人都能轻松记录学习笔记，收藏优质网站，并与他人分享。</p>
+                    
+                    <h3 style="margin-top: 1.5rem;">平台特色</h3>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>简洁易用的笔记系统，支持多种分类</li>
+                        <li>个性化网站收藏，构建个人知识库</li>
+                        <li>社区分享功能，发现优质内容</li>
+                        <li>响应式设计，多设备适配</li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 1.5rem;">技术栈</h3>
+                    <p>本平台使用纯前端技术实现，基于HTML5、CSS3和JavaScript，数据存储在浏览器本地，确保您的隐私安全。</p>
+                    
+                    <div style="margin-top: 2rem; text-align: center;">
+                        <button class="btn btn-accent">
+                            <i class="fas fa-heart"></i> 支持我们
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <i class="fas fa-gem"></i>
+                    <span>知识宝藏</span>
+                </div>
+                <p>分享知识，收藏智慧</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fas fa-envelope"></i></a>
+                </div>
+                <p>&copy; 2023 知识宝藏. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 添加笔记模态框 -->
+    <div class="modal" id="note-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="note-modal-title">添加新笔记</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="note-form">
+                <input type="hidden" id="note-id">
+                <div class="form-group">
+                    <label for="note-title" class="form-label">标题</label>
+                    <input type="text" id="note-title" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="note-category" class="form-label">分类</label>
+                    <select id="note-category" class="form-control" required>
+                        <option value="">请选择分类</option>
+                        <option value="study">学习笔记</option>
+                        <option value="work">工作笔记</option>
+                        <option value="life">生活笔记</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="note-content" class="form-label">内容</label>
+                    <textarea id="note-content" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="note-tags" class="form-label">标签 (用逗号分隔)</label>
+                    <input type="text" id="note-tags" class="form-control">
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" class="btn btn-outline modal-close">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 添加网站模态框 -->
+    <div class="modal" id="website-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="website-modal-title">添加新网站</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="website-form">
+                <input type="hidden" id="website-id">
+                <div class="form-group">
+                    <label for="website-name" class="form-label">网站名称</label>
+                    <input type="text" id="website-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="website-url" class="form-label">网站地址</label>
+                    <input type="url" id="website-url" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="website-category" class="form-label">分类</label>
+                    <select id="website-category" class="form-control" required>
+                        <option value="">请选择分类</option>
+                        <option value="tech">技术网站</option>
+                        <option value="design">设计网站</option>
+                        <option value="learning">学习资源</option>
+                        <option value="tools">工具网站</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="website-description" class="form-label">描述</label>
+                    <textarea id="website-description" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="website-tags" class="form-label">标签 (用逗号分隔)</label>
+                    <input type="text" id="website-tags" class="form-control">
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" class="btn btn-outline modal-close">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 数据模型
+        const dataModel = {
+            notes: JSON.parse(localStorage.getItem('notes')) || [],
+            websites: JSON.parse(localStorage.getItem('websites')) || [],
+            
+            saveNotes() {
+                localStorage.setItem('notes', JSON.stringify(this.notes));
+            },
+            
+            saveWebsites() {
+                localStorage.setItem('websites', JSON.stringify(this.websites));
+            },
+            
+            addNote(note) {
+                note.id = Date.now().toString();
+                note.createdAt = new Date().toISOString();
+                this.notes.unshift(note);
+                this.saveNotes();
+                return note;
+            },
+            
+            updateNote(id, updatedNote) {
+                const index = this.notes.findIndex(note => note.id === id);
+                if (index !== -1) {
+                    this.notes[index] = {...this.notes[index], ...updatedNote};
+                    this.saveNotes();
+                    return true;
+                }
+                return false;
+            },
+            
+            deleteNote(id) {
+                const index = this.notes.findIndex(note => note.id === id);
+                if (index !== -1) {
+                    this.notes.splice(index, 1);
+                    this.saveNotes();
+                    return true;
+                }
+                return false;
+            },
+            
+            addWebsite(website) {
+                website.id = Date.now().toString();
+                website.createdAt = new Date().toISOString();
+                this.websites.unshift(website);
+                this.saveWebsites();
+                return website;
+            },
+            
+            updateWebsite(id, updatedWebsite) {
+                const index = this.websites.findIndex(website => website.id === id);
+                if (index !== -1) {
+                    this.websites[index] = {...this.websites[index], ...updatedWebsite};
+                    this.saveWebsites();
+                    return true;
+                }
+                return false;
+            },
+            
+            deleteWebsite(id) {
+                const index = this.websites.findIndex(website => website.id === id);
+                if (index !== -1) {
+                    this.websites.splice(index, 1);
+                    this.saveWebsites();
+                    return true;
+                }
+                return false;
+            }
+        };
+
+        // UI控制器
+        const uiController = {
+            currentSection: 'home',
+            
+            init() {
+                this.bindEvents();
+                this.renderNotes();
+                this.renderWebsites();
+            },
+            
+            bindEvents() {
+                // 导航菜单
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.showSection(e.target.getAttribute('data-section'));
+                    });
+                });
+                
+                // 首页按钮
+                document.querySelectorAll('[data-section]').forEach(btn => {
+                    if (btn.tagName === 'BUTTON') {
+                        btn.addEventListener('click', (e) => {
+                            this.showSection(e.target.getAttribute('data-section'));
+                        });
+                    }
+                });
+                
+                // 移动菜单
+                document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+                    document.querySelector('nav ul').classList.toggle('show');
+                });
+                
+                // 模态框关闭
+                document.querySelectorAll('.modal-close').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.modal').forEach(modal => {
+                            modal.style.display = 'none';
+                        });
+                    });
+                });
+                
+                // 添加笔记按钮
+                document.getElementById('add-note-btn').addEventListener('click', () => {
+                    this.showNoteModal();
+                });
+                
+                // 添加网站按钮
+                document.getElementById('add-website-btn').addEventListener('click', () => {
+                    this.showWebsiteModal();
+                });
+                
+                // 笔记表单提交
+                document.getElementById('note-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.saveNote();
+                });
+                
+                // 网站表单提交
+                document.getElementById('website-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.saveWebsite();
+                });
+                
+                // 点击模态框外部关闭
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) {
+                            modal.style.display = 'none';
+                        }
+                    });
+                });
+            },
+            
+            showSection(sectionName) {
+                // 隐藏所有部分
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // 显示选中的部分
+                document.getElementById(sectionName).classList.add('active');
+                
+                // 更新导航菜单
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                document.querySelector(`.nav-link[data-section="${sectionName}"]`).classList.add('active');
+                
+                // 隐藏移动菜单
+                document.querySelector('nav ul').classList.remove('show');
+                
+                this.currentSection = sectionName;
+            },
+            
+            showNoteModal(note = null) {
+                const modal = document.getElementById('note-modal');
+                const title = document.getElementById('note-modal-title');
+                const form = document.getElementById('note-form');
+                
+                if (note) {
+                    // 编辑模式
+                    title.textContent = '编辑笔记';
+                    document.getElementById('note-id').value = note.id;
+                    document.getElementById('note-title').value = note.title;
+                    document.getElementById('note-category').value = note.category;
+                    document.getElementById('note-content').value = note.content;
+                    document.getElementById('note-tags').value = note.tags ? note.tags.join(', ') : '';
+                } else {
+                    // 添加模式
+                    title.textContent = '添加新笔记';
+                    form.reset();
+                    document.getElementById('note-id').value = '';
+                }
+                
+                modal.style.display = 'flex';
+            },
+            
+            showWebsiteModal(website = null) {
+                const modal = document.getElementById('website-modal');
+                const title = document.getElementById('website-modal-title');
+                const form = document.getElementById('website-form');
+                
+                if (website) {
+                    // 编辑模式
+                    title.textContent = '编辑网站';
+                    document.getElementById('website-id').value = website.id;
+                    document.getElementById('website-name').value = website.name;
+                    document.getElementById('website-url').value = website.url;
+                    document.getElementById('website-category').value = website.category;
+                    document.getElementById('website-description').value = website.description;
+                    document.getElementById('website-tags').value = website.tags ? website.tags.join(', ') : '';
+                } else {
+                    // 添加模式
+                    title.textContent = '添加新网站';
+                    form.reset();
+                    document.getElementById('website-id').value = '';
+                }
+                
+                modal.style.display = 'flex';
+            },
+            
+            saveNote() {
+                const id = document.getElementById('note-id').value;
+                const note = {
+                    title: document.getElementById('note-title').value,
+                    category: document.getElementById('note-category').value,
+                    content: document.getElementById('note-content').value,
+                    tags: document.getElementById('note-tags').value.split(',').map(tag => tag.trim()).filter(tag => tag)
+                };
+                
+                if (id) {
+                    // 更新现有笔记
+                    dataModel.updateNote(id, note);
+                } else {
+                    // 添加新笔记
+                    dataModel.addNote(note);
+                }
+                
+                document.getElementById('note-modal').style.display = 'none';
+                this.renderNotes();
+            },
+            
+            saveWebsite() {
+                const id = document.getElementById('website-id').value;
+                const website = {
+                    name: document.getElementById('website-name').value,
+                    url: document.getElementById('website-url').value,
+                    category: document.getElementById('website-category').value,
+                    description: document.getElementById('website-description').value,
+                    tags: document.getElementById('website-tags').value.split(',').map(tag => tag.trim()).filter(tag => tag)
+                };
+                
+                if (id) {
+                    // 更新现有网站
+                    dataModel.updateWebsite(id, website);
+                } else {
+                    // 添加新网站
+                    dataModel.addWebsite(website);
+                }
+                
+                document.getElementById('website-modal').style.display = 'none';
+                this.renderWebsites();
+            },
+            
+            renderNotes() {
+                const notesList = document.getElementById('notes-list');
+                
+                if (dataModel.notes.length === 0) {
+                    notesList.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-sticky-note"></i>
+                            <h3>暂无笔记</h3>
+                            <p>点击上方按钮添加您的第一条笔记</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                notesList.innerHTML = dataModel.notes.map(note => {
+                    const categoryClass = `category-${note.category}`;
+                    const categoryText = {
+                        'study': '学习笔记',
+                        'work': '工作笔记',
+                        'life': '生活笔记'
+                    }[note.category] || '其他';
+                    
+                    const date = new Date(note.createdAt).toLocaleDateString('zh-CN');
+                    
+                    return `
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">${note.title}</h3>
+                                <span class="category-tag ${categoryClass}">${categoryText}</span>
+                            </div>
+                            <p>${note.content.length > 150 ? note.content.substring(0, 150) + '...' : note.content}</p>
+                            <div style="margin-top: 1rem;">
+                                ${note.tags && note.tags.map(tag => `<span class="category-tag" style="background: #e9ecef; color: #495057;">${tag}</span>`).join('')}
+                            </div>
+                            <div class="card-actions" style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                                <small style="color: #6c757d;">创建于 ${date}</small>
+                                <div>
+                                    <button class="btn btn-outline edit-note" data-id="${note.id}">编辑</button>
+                                    <button class="btn btn-danger delete-note" data-id="${note.id}">删除</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                // 绑定编辑和删除事件
+                document.querySelectorAll('.edit-note').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = e.target.getAttribute('data-id');
+                        const note = dataModel.notes.find(n => n.id === id);
+                        if (note) {
+                            this.showNoteModal(note);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.delete-note').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = e.target.getAttribute('data-id');
+                        if (confirm('确定要删除这条笔记吗？')) {
+                            dataModel.deleteNote(id);
+                            this.renderNotes();
+                        }
+                    });
+                });
+            },
+            
+            renderWebsites() {
+                const websitesList = document.getElementById('websites-list');
+                
+                if (dataModel.websites.length === 0) {
+                    websitesList.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-bookmark"></i>
+                            <h3>暂无收藏网站</h3>
+                            <p>点击上方按钮添加您的第一个网站收藏</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                websitesList.innerHTML = dataModel.websites.map(website => {
+                    const categoryClass = `category-${website.category}`;
+                    const categoryText = {
+                        'tech': '技术网站',
+                        'design': '设计网站',
+                        'learning': '学习资源',
+                        'tools': '工具网站'
+                    }[website.category] || '其他';
+                    
+                    const date = new Date(website.createdAt).toLocaleDateString('zh-CN');
+                    
+                    return `
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">${website.name}</h3>
+                                <span class="category-tag ${categoryClass}">${categoryText}</span>
+                            </div>
+                            <p><strong>网址:</strong> <a href="${website.url}" target="_blank">${website.url}</a></p>
+                            <p>${website.description}</p>
+                            <div style="margin-top: 1rem;">
+                                ${website.tags && website.tags.map(tag => `<span class="category-tag" style="background: #e9ecef; color: #495057;">${tag}</span>`).join('')}
+                            </div>
+                            <div class="card-actions" style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                                <small style="color: #6c757d;">收藏于 ${date}</small>
+                                <div>
+                                    <button class="btn btn-outline edit-website" data-id="${website.id}">编辑</button>
+                                    <button class="btn btn-danger delete-website" data-id="${website.id}">删除</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                // 绑定编辑和删除事件
+                document.querySelectorAll('.edit-website').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = e.target.getAttribute('data-id');
+                        const website = dataModel.websites.find(w => w.id === id);
+                        if (website) {
+                            this.showWebsiteModal(website);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.delete-website').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = e.target.getAttribute('data-id');
+                        if (confirm('确定要删除这个网站收藏吗？')) {
+                            dataModel.deleteWebsite(id);
+                            this.renderWebsites();
+                        }
+                    });
+                });
+            }
+        };
+
+        // 初始化应用
+        document.addEventListener('DOMContentLoaded', () => {
+            uiController.init();
+        });
+    </script>
+</body>
+</html>
